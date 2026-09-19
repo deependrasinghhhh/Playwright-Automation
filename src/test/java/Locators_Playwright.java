@@ -21,7 +21,7 @@ public class Locators_Playwright {
 
         try (Playwright obj_playwright = Playwright.create()) {
 
-            // Launch browser in headed mode to see the actions
+
             Browser obj_browser = obj_playwright.chromium().launch(
                     new BrowserType.LaunchOptions().setHeadless(false).setSlowMo(500)
             );
@@ -32,19 +32,19 @@ public class Locators_Playwright {
             // 1. Navigate to the Sauce Demo login page
             obj_page.navigate("https://www.saucedemo.com/");
             try {
-                // locator using id attribute
+
                 Locator userById = obj_page.locator(id_userName);
 
-                // locator using name attribute
+
                 Locator userByName = obj_page.locator(name_userName);
 
-                // locator using placeholder
+
                 Locator userByPlaceholder = obj_page.getByPlaceholder(placeholder_userName);
 
-                // locator using id attribute (password field)
+
                 Locator passById = obj_page.locator(id_password);
 
-                // validate using if statement
+
                 if (userById.isVisible() && userByName.isVisible() && userByPlaceholder.isVisible() && passById.isVisible()) {
                     System.out.println("All individual locators were identified and are visible on the page.");
                 } else {
@@ -55,12 +55,12 @@ public class Locators_Playwright {
             }
 
             Locator usernameField = obj_page.getByPlaceholder(placeholder_userName);
-            Locator passwordField = obj_page.getByPlaceholder("Password");
-            Locator loginButton   = obj_page.locator(css_LoginButton); // or obj_page.locator(xPath_LoginButton)
-
-
             usernameField.fill(userName);
+
+            Locator passwordField = obj_page.getByPlaceholder("Password");
             passwordField.fill(password);
+
+            Locator loginButton = obj_page.locator(css_LoginButton);
             loginButton.click();
 
 
@@ -74,8 +74,7 @@ public class Locators_Playwright {
             obj_page.close();
             obj_context.close();
             obj_browser.close();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("Test Failed with an Exception");
             e.printStackTrace();
         }
