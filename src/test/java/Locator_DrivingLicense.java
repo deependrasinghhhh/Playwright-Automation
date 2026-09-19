@@ -48,6 +48,8 @@ public class Locator_DrivingLicense {
             obj_newpage.waitForLoadState();
             System.out.println("New Page Title: " + obj_newpage.title());
 
+            Locator enterName = obj_newpage.locator("input[name='name']");
+
             obj_page1.waitForTimeout(2000);
 
 
