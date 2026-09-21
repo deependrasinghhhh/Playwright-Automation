@@ -15,17 +15,17 @@ public class LocatorFiltering_DragDrop {
             Locator targetContainer = page.locator("#targetContainer");
 
 
-            Locator sourceItems = sourceContainer.locator("> div");
+            Locator sourceItems = sourceContainer.locator(".draggable-item");
             List<Locator> allItems = sourceItems.all();
             int totalCount = allItems.size();
 
-            // 2. Iterate using a for loop
+
             for (int i = 0; i < totalCount; i++) {
                 sourceItems.first().dragTo(targetContainer);
             }
 
-            // Validation
-            if (sourceItems.count() == 0 && targetContainer.locator("> div").count() == totalCount) {
+
+            if (sourceItems.count() == 0 && targetContainer.locator(".draggable-item").count() == totalCount) {
                 System.out.println("Successfully moved all " + totalCount + " items to target container!");
             } else {
                 System.out.println("Failed to move all items.");
