@@ -1,5 +1,6 @@
 import com.microsoft.playwright.*;
-import com.microsoft.playwright.options.SelectOption;
+
+import java.util.List;
 
 public class LocatorFiltering_DragDrop {
     public static void main(String[] args) {
@@ -14,19 +15,23 @@ public class LocatorFiltering_DragDrop {
             Locator targetContainer = page.locator("#targetContainer");
 
 
-            page.locator("#item1").dragTo(targetContainer);
-            page.locator("#item2").dragTo(sourceContainer);
-            page.locator("#item3").dragTo(targetContainer);
+            Locator sourceItems = sourceContainer.locator("> div");
+            List<Locator> allItems = sourceItems.all();
+            int totalCount = allItems.size();
 
-            if (targetContainer.isVisible()){
-                System.out.println("Successfully moved");
-            } else {
-                System.out.println("Failed");
+            // 2. Iterate using a for loop
+            for (int i = 0; i < totalCount; i++) {
+                sourceItems.first().dragTo(targetContainer);
             }
 
+            // Validation
+            if (sourceItems.count() == 0 && targetContainer.locator("> div").count() == totalCount) {
+                System.out.println("Successfully moved all " + totalCount + " items to target container!");
+            } else {
+                System.out.println("Failed to move all items.");
+            }
 
             page.waitForTimeout(2000);
-
             browser.close();
         } catch (Exception e) {
             System.err.println("Test Failed with an Exception:");
