@@ -1,6 +1,7 @@
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.options.WaitForSelectorState;
 
-public class LocatorFiltering_Controlsprac {
+public class ExplicitWait_ControlsPrac {
     public static void main(String[] args) {
         try (Playwright obj_playwright = Playwright.create()) {
             Browser obj_browser = obj_playwright.chromium()
@@ -13,9 +14,11 @@ public class LocatorFiltering_Controlsprac {
             obj_page.navigate("file:///c%3A/Users/CCST/Desktop/Playwright/PlaywrightMaterial/ControlsPractice.html");
             obj_page.waitForLoadState();
 
+            Locator allRows = obj_page.locator("#studentTableBody tr");
+
+            System.out.println("No of rows before selection: " + allRows.count());
+
             Locator dropdown = obj_page.locator("#module");
-
-
             Locator singleOption = dropdown.locator("option")
                     .filter(new Locator.FilterOptions().setHasText("CCST"));
 
@@ -23,25 +26,16 @@ public class LocatorFiltering_Controlsprac {
             System.out.println("Extracted value: " + value);
             dropdown.selectOption(value);
 
+            allRows.first().waitFor(new Locator.WaitForOptions()
+                    .setState(WaitForSelectorState.VISIBLE));
+
+
+            int totalRows = allRows.count();
+            System.out.println("No of rows after selection: " + totalRows);
 
             int marks = 99;
-
-            Locator allRows = obj_page.locator("#studentTableBody tr");
-
             Locator validRows = allRows.filter(new Locator.FilterOptions()
                     .setHas(obj_page.locator("input[type='number']")));
-
-//          Locator rowsWithMarksInput = rows.filter(
-//                  new Locator.FilterOptions().setHas(obj_controlsPage.locator("input[type = 'number']")));
-
-//          for (Locator row : rowswITHmARKSiNPUT.ALL()){
-//              lOCATOR MARKSINPUT = ROW.LOCATOR();
-//              NARKS.iNPUT.FILL("99");
-
-
-
-            int totalRows = validRows.count();
-            System.out.println("Populating marks for " + totalRows + " rows");
 
             for (int i = 0; i < totalRows; i++) {
                 validRows.nth(i).locator("input[type='number']").fill(Integer.toString(marks));
