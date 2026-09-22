@@ -5,6 +5,8 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
 public class Locators_Playwright {
     public static void main(String[] args) {
 
@@ -43,6 +45,7 @@ public class Locators_Playwright {
 
 
                 Locator passById = obj_page.locator(id_password);
+
 
 
                 if (userById.isVisible() && userByName.isVisible() && userByPlaceholder.isVisible() && passById.isVisible()) {

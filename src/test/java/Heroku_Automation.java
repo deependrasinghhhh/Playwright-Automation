@@ -73,6 +73,23 @@ public class Heroku_Automation {
             System.out.println("Text is: " + validate);
 
 
+            obj_Page.navigate("https://the-internet.herokuapp.com/");
+
+            Locator obj_DynamicCtrl = obj_Page.getByText("Dynamic Controls");
+            obj_DynamicCtrl.click();
+
+            Locator obj_Checkbox = obj_Page.locator("#checkbox");
+            obj_Checkbox.click();
+
+            Locator obj_RemoveBtn = obj_Page.locator("//button[@onclick = 'swapCheckbox()']");
+            obj_RemoveBtn.click();
+
+            Locator obj_message = obj_Page.locator("#message");
+
+
+
+
+
             Thread.sleep(3000);
 
             obj_Browser.close();
