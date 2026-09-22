@@ -1,5 +1,6 @@
 import com.microsoft.playwright.*;
 
+
 public class Heroku_Automation {
 
     public static void main(String[] args) {
@@ -36,12 +37,45 @@ public class Heroku_Automation {
 
 
             if (!obj_Page.isVisible(".added-manually")) {
-                System.out.println("Button disappeared");
+                System.out.println("Delete button disappeared");
 
 
             }
 
+            obj_Page.navigate("https://the-internet.herokuapp.com/");
+
+            Locator obj_DragDrop = obj_Page.getByText("Drag and Drop");
+            obj_DragDrop.click();
+
+            Locator column_a = obj_Page.locator("#column-a");
+            Locator column_b = obj_Page.locator("#column-b");
+            column_a.dragTo(column_b);
+
+
+            if (column_a.locator("header").innerText().equals("B")) {
+                System.out.println("Drag Success");
+            }
+
+            obj_Page.navigate("https://the-internet.herokuapp.com/");
+
+            Locator obj_DropDown = obj_Page.getByText("Dropdown");
+            obj_DropDown.click();
+
+            if (obj_Page.url().contains("dropdown")) {
+                System.out.println("Page opened");
+
+            }
+
+            Locator obj_List = obj_Page.locator("#dropdown");
+            obj_List.selectOption("1");
+
+            String validate = obj_List.locator("option:checked").innerText();
+            System.out.println("Text is: " + validate);
+
+
             Thread.sleep(3000);
+
+            obj_Browser.close();
 
 
         } catch (InterruptedException e) {
