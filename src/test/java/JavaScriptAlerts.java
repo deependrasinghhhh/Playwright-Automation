@@ -63,12 +63,13 @@ public class JavaScriptAlerts {
 
             obj_Page.onceDialog(Dialog::dismiss);
             obj_Page.click("#promptBtn");
+            obj_Page.waitForTimeout(500);
 
             String promptDismissResult = obj_Page.textContent("#promptResult");
             System.out.println("Prompt after dismiss: " + promptDismissResult);
             assertThat(obj_Page.locator("#promptResult")).containsText("Prompt was dismissed.");
 
-            Thread.sleep(2000);
+
 
         }
     }
