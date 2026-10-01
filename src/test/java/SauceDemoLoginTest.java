@@ -3,12 +3,14 @@ import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
+import org.testng.annotations.Test;
 
 public class SauceDemoLoginTest {
-    public static void main(String[] args) {
+    @Test
+    public void loginShowsValidationAndProducts() {
         try (Playwright playwright = Playwright.create()) {
             Browser browser = playwright.chromium().launch(
-                    new BrowserType.LaunchOptions().setHeadless(false)
+                    new BrowserType.LaunchOptions().setHeadless(true)
             );
             Page page = browser.newPage();
 
