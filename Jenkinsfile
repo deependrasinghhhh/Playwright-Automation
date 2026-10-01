@@ -5,6 +5,11 @@ pipeline {
         githubPush()
     }
 
+    tools {
+        jdk 'JDK'
+        maven 'Maven-3'
+    }
+
     options {
         timestamps()
         timeout(time: 20, unit: 'MINUTES')

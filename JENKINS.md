@@ -5,8 +5,8 @@ this controller. Java 22, Maven, and Git must be available on the agent's
 `PATH`. The Playwright browser is downloaded during the Test stage.
 
 1. Install the Jenkins Pipeline, GitHub, and JUnit plugins.
-2. Confirm `java -version`, `mvn -version`, and `git --version` work under the
-   Jenkins service account.
+2. In **Manage Jenkins > Tools**, configure a JDK named `JDK` for Java 22 and
+   Maven named `Maven-3` for Maven 3.9.16, using the install paths on the host.
 3. Create a Pipeline job using **Pipeline script from SCM**, Git, and
    `https://github.com/deependrasinghhhh/Playwright-Automation.git`, branch
    `*/main`, and script path `Jenkinsfile`.
