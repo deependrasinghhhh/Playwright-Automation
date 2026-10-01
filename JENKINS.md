@@ -1,14 +1,12 @@
 # Jenkins setup
 
-The pipeline expects a Linux Jenkins agent with Java 22, Maven, Git, and the
-native libraries required by Playwright Chromium. Install the Chromium system
-dependencies on the agent once with the Playwright CLI's `install-deps`
-command; the pipeline downloads the Chromium browser itself during the Test
-stage.
+The pipeline is written for the Windows Jenkins agent currently configured on
+this controller. Java 22, Maven, and Git must be available on the agent's
+`PATH`. The Playwright browser is downloaded during the Test stage.
 
 1. Install the Jenkins Pipeline, GitHub, and JUnit plugins.
-2. In **Manage Jenkins > Tools**, configure a JDK named `JDK-22` and Maven
-   named `Maven-3`.
+2. Confirm `java -version`, `mvn -version`, and `git --version` work under the
+   Jenkins service account.
 3. Create a Pipeline job using **Pipeline script from SCM**, Git, and
    `https://github.com/deependrasinghhhh/Playwright-Automation.git`, branch
    `*/main`, and script path `Jenkinsfile`.

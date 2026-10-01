@@ -5,11 +5,6 @@ pipeline {
         githubPush()
     }
 
-    tools {
-        jdk 'JDK-22'
-        maven 'Maven-3'
-    }
-
     options {
         timestamps()
         timeout(time: 20, unit: 'MINUTES')
@@ -18,14 +13,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -B -DskipTests package'
+                bat 'mvn -B -DskipTests package'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn -B org.codehaus.mojo:exec-maven-plugin:3.6.4:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install chromium"'
-                sh 'mvn -B test'
+                bat 'mvn -B org.codehaus.mojo:exec-maven-plugin:3.6.4:java -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install chromium"'
+                bat 'mvn -B test'
             }
             post {
                 always {
