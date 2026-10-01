@@ -40,7 +40,7 @@ public class SauceDemoLoginTest {
 
 
             Locator pageHeader = page.locator(".title");
-            CustomAssertions.assertThat(pageHeader).hasText("Products");
+            CustomAssertions.assertThat(pageHeader).hasText("Dashboard");
             System.out.println("Dashboard title verified!");
         }
     }
